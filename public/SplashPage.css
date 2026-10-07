@@ -1,0 +1,361 @@
+:root {
+    --red: #D6102A;
+    --red-dark: #A50E22;
+    --black: #15151A;
+    --black-soft: #0F0F13;
+    --white: #FFFFFF;
+    --gray: #9A9AA2;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background: var(--black);
+    color: var(--white);
+    -webkit-font-smoothing: antialiased;
+}
+
+
+/* ==============================
+   SPLASH PAGE
+================================ */
+
+.splash-page {
+    min-height: 100vh;
+    width: 100%;
+
+    position: relative;
+    overflow: hidden;
+
+    display: flex;
+    align-items: center;
+
+    background:
+        radial-gradient(
+            900px 650px at 100% 0%,
+            rgba(214, 16, 42, 0.28),
+            transparent 60%
+        ),
+        linear-gradient(
+            180deg,
+            var(--black) 0%,
+            var(--black-soft) 100%
+        );
+}
+
+
+/* ==============================
+   BACKGROUND
+================================ */
+
+.splash-background {
+    position: absolute;
+    inset: 0;
+
+    pointer-events: none;
+
+    opacity: 0.4;
+
+    background-image:
+        linear-gradient(
+            rgba(255, 255, 255, 0.05) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0.05) 1px,
+            transparent 1px
+        );
+
+    background-size: 42px 42px;
+
+    -webkit-mask-image:
+        radial-gradient(
+            900px 650px at 100% 0%,
+            rgba(0, 0, 0, 0.9),
+            transparent 68%
+        );
+
+    mask-image:
+        radial-gradient(
+            900px 650px at 100% 0%,
+            rgba(0, 0, 0, 0.9),
+            transparent 68%
+        );
+}
+
+
+/* Marca d'água */
+
+.splash-page::after {
+    content: 'S';
+
+    position: absolute;
+
+    right: -60px;
+    bottom: -200px;
+
+    font-size: min(44vw, 640px);
+    font-weight: 800;
+    line-height: 1;
+
+    color: rgba(255, 255, 255, 0.035);
+
+    pointer-events: none;
+    user-select: none;
+}
+
+
+/* ==============================
+   CONTENT
+================================ */
+
+.splash-content {
+    position: relative;
+    z-index: 2;
+
+    width: 100%;
+    max-width: 860px;
+
+    padding: 0 9vw;
+}
+
+
+/* ==============================
+   EYEBROW
+================================ */
+
+.eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    margin-bottom: 22px;
+
+    color: var(--red);
+
+    font-size: 12.5px;
+    font-weight: 600;
+
+    letter-spacing: 0.16em;
+}
+
+.eyebrow::before {
+    content: '';
+
+    width: 16px;
+    height: 2px;
+
+    background: var(--red);
+
+    display: inline-block;
+}
+
+
+/* ==============================
+   TITLE
+================================ */
+
+.splash-content h1 {
+    margin: 0;
+
+    font-size: clamp(34px, 5vw, 62px);
+    line-height: 1.08;
+
+    font-weight: 800;
+    letter-spacing: -0.01em;
+
+    white-space: nowrap;
+}
+
+.splash-content h1 span {
+    display: block;
+
+    color: var(--red);
+}
+
+
+/* ==============================
+   DESCRIPTION
+================================ */
+
+.description {
+    max-width: 34em;
+
+    margin-top: 22px;
+
+    color: var(--gray);
+
+    font-size: 16px;
+    line-height: 1.65;
+
+    font-weight: 400;
+}
+
+
+/* ==============================
+   BUTTON
+================================ */
+
+.access-button {
+    margin-top: 34px;
+
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+
+    padding: 16px 16px 16px 30px;
+
+    border: none;
+    border-radius: 11px;
+
+    background: var(--red);
+    color: var(--white);
+
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14.5px;
+    font-weight: 700;
+
+    letter-spacing: 0.03em;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 10px 26px rgba(214, 16, 42, 0.4);
+
+    transition:
+        background-color 0.15s ease,
+        transform 0.15s ease,
+        box-shadow 0.15s ease;
+}
+
+.access-button:hover {
+    background: var(--red-dark);
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 14px 32px rgba(214, 16, 42, 0.48);
+}
+
+.access-button:active {
+    transform: translateY(0);
+}
+
+
+/* ==============================
+   ARROW
+================================ */
+
+.arrow {
+    width: 30px;
+    height: 30px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 7px;
+
+    background: var(--white);
+    color: var(--red);
+
+    flex-shrink: 0;
+}
+
+.arrow svg {
+    width: 14px;
+    height: 14px;
+}
+
+
+/* ==============================
+   WORKING HOURS
+================================ */
+
+.working-hours {
+    position: absolute;
+
+    left: 9vw;
+    bottom: 40px;
+
+    z-index: 2;
+
+    color: var(--gray);
+
+    font-size: 12.5px;
+    font-weight: 500;
+}
+
+.working-hours strong {
+    color: var(--white);
+    font-weight: 600;
+}
+
+
+/* ==============================
+   RESPONSIVE
+================================ */
+
+@media (max-width: 700px) {
+
+    .splash-content {
+        padding: 0 24px;
+    }
+
+    .splash-content h1 {
+        white-space: normal;
+
+        font-size: clamp(30px, 9vw, 44px);
+    }
+
+    .description {
+        max-width: 100%;
+
+        font-size: 14px;
+    }
+
+    .access-button {
+        width: 100%;
+
+        justify-content: space-between;
+    }
+
+    .working-hours {
+        left: 24px;
+        bottom: 26px;
+
+        font-size: 11.5px;
+    }
+}
+
+
+/* ==============================
+   SMALL MOBILE
+================================ */
+
+@media (max-width: 400px) {
+
+    .eyebrow {
+        font-size: 10px;
+    }
+
+    .description {
+        font-size: 13px;
+    }
+
+    .access-button {
+        font-size: 13px;
+    }
+}
