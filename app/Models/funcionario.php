@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\usuario;
 
 class funcionario extends Model
 {
@@ -14,4 +15,9 @@ class funcionario extends Model
         'funcao',
         'situacao'
     ];
+
+    public function usuario()
+    {
+        return $this->belongsTo(usuario::class, 'id_usuario');
+    }
 }

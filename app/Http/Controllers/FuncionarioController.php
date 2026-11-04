@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Funcionario;
 use Illuminate\Support\Facades\Hash;
+use App\Models\UsuarioToken;
 
 class FuncionarioController extends Controller
 {
@@ -102,4 +103,6 @@ class FuncionarioController extends Controller
         }
         
     }
+    
+    
 }
