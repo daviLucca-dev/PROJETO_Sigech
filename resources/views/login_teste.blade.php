@@ -13,69 +13,73 @@
     @vite(['resources/js/login_teste.js'])
 </head>
 <body>
-<div class="container min-vh-100 d-flex justify-content-center align-items-center">
+<div class="container-fluid min-vh-100 d-flex justify-content-center align-items-center p-3"
+     style="
+        background:
+            radial-gradient(ellipse at 15% 20%, rgba(37, 99, 235, 0.30), transparent 45%),
+            radial-gradient(ellipse at 85% 80%, rgba(124, 58, 237, 0.30), transparent 45%),
+            linear-gradient(135deg, #080d1c, #111827, #0b1020);
+     ">
 
-    <div class="card border-0 shadow-lg rounded-4 p-4 w-100"
-         style="max-width: 380px;">
+    <div class="w-100 p-4 p-sm-5 rounded-4 shadow-lg"
+         style="
+            max-width: 390px;
+            background: rgba(255, 255, 255, 0.07);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+         ">
 
-        <!-- Cabeçalho -->
         <div class="text-center mb-4">
-            <div class="mb-3">
-                <span class="rounded-3 px-3 py-2 d-inline-block text-white shadow-sm"
-                      style="background: linear-gradient(135deg, #2563eb, #7c3aed);">
-                    <i class="bi bi-person-lock fs-4"></i>
-                </span>
-            </div>
 
-            <h3 class="fw-bold mb-1 text-dark">Bem-vindo!</h3>
-            <p class="text-secondary small mb-0">
-                Acesse sua conta para continuar.
+            <h3 class="fw-bold text-white mb-2">Bem-vindo!</h3>
+            <p class="text-white-50 small mb-0">
+                Entre na sua conta para continuar.
             </p>
         </div>
 
-        <!-- Email -->
         <div class="mb-3">
-            <label for="email" class="form-label fw-semibold text-dark">
+            <label for="email" class="form-label text-white fw-semibold">
                 Email
             </label>
 
             <input
                 type="email"
-                class="form-control rounded-3 py-2"
+                class="form-control rounded-3 py-2 border-0"
                 id="email"
                 placeholder="seuemail@exemplo.com"
                 aria-describedby="emailHelp"
             >
 
-            <div id="emailHelp" class="form-text">
+            <div id="emailHelp" class="form-text text-white-50">
                 Informe seu email cadastrado.
             </div>
         </div>
 
-        <!-- Senha -->
         <div class="mb-4">
-            <label for="senha" class="form-label fw-semibold text-dark">
+            <label for="senha" class="form-label text-white fw-semibold">
                 Senha
             </label>
 
             <input
                 type="password"
-                class="form-control rounded-3 py-2"
+                class="form-control rounded-3 py-2 border-0"
                 id="senha"
                 placeholder="Digite sua senha"
             >
         </div>
 
-        <!-- Botão -->
         <button
             type="button"
-            class="btn w-100 rounded-3 py-2 text-white fw-semibold shadow-sm"
-            style="background: linear-gradient(100deg, #2563eb, #7c3aed); border: none;"
+            class="btn w-100 py-2 rounded-3 text-white fw-semibold shadow"
+            style="
+                background: linear-gradient(100deg, #2563eb, #7c3aed);
+                border: 1px solid rgba(255,255,255,0.2);"
+            id="entrar"
         >
             Entrar
             <i class="bi bi-arrow-right ms-1"></i>
         </button>
-
 
     </div>
 </div>
