@@ -1,0 +1,2 @@
+$kind: collection
+description: Esta coleção reúne os endpoints da API REST do **SIGECH** (Sistema de Gerenciamento de Chaves), uma aplicação Laravel voltada ao controle e rastreamento de chaves físicas em ambientes institucionais.

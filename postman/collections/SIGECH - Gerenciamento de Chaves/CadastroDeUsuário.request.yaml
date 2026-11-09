@@ -1,0 +1,20 @@
+$kind: http-request
+description: ""
+url: http://sigech.test/api/salvar_usuario
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \    \"nome\": \"Davi Lucca\",\r
+
+    \    \"email\": \"davi@gmail.com\",\r
+
+    \    \"senha\": \"123456\",\r
+
+    \    \"perfil\": \"admin\",\r
+
+    \    \"situacao\": 1\r
+
+    }"
+order: 1000
