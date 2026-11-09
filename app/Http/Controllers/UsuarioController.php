@@ -117,7 +117,7 @@ class UsuarioController extends Controller
                 $user_token->token = Hash::make($usuario->email . $usuario->senha . now());
                 $user_token->valido_ate = now()->addDays(7);
                 $user_token->save();
-                return response()->json(['message' => 'Login realizado com sucesso!','erro' => 'n', 'token' => $user_token->token, 'usuario' => $usuario],200);
+                return response()->json(['message' => 'Login realizado com sucesso!','erro' => 'n', 'token' => $user_token->token, "usuario_id" => $usuario->id, 'usuario' => $usuario],200);
 
             }else{
                 return response()->json(['message' => 'Usuário ou senha não encontrados!','erro' => 's'], 200);

@@ -31,6 +31,11 @@ $(document).ready(function () {
             success: function (response) {
                 if (response.erro == 'n') {
                     alert(response.token);
+                    $cookie('token', response.token, { expires: 7});
+                    $cookie('usuario_id', response.usuario_id, { expires: 7});
+                    setTimeout(function () {
+                        window.location.href = "../FuncionarioHome";
+                    }, 3000);
                 } else {
                     Swal.fire({
                         icon: "error",
