@@ -37,10 +37,7 @@
     >
 
     {{-- CSS padrão do ambiente do funcionário --}}
-    <link
-        rel="stylesheet"
-        href="{{ asset('FuncionarioHome.css') }}"
-    >
+    @vite('resources/css/FuncionarioHome.css')
 
 </head>
 
