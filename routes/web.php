@@ -19,6 +19,16 @@ Route::get('/SplashPage', [SplashPage::class, 'SplashPage']);
 Route::get('/LoginPage', [LoginPage::class, 'LoginPage']);
 Route::get('/FuncionarioHome', [FuncionarioHome::class, 'FuncionarioHome']);
 Route::get('/RetirarChave', [RetirarChave::class, 'RetirarChave']);
-Route::get('/login', [LoginController::class, 'mostrarLogin'])->name('login');
-Route::get('/home', [homeController::class, 'mostrarHome'])->middleware(LogadoWebMiddleware::class)->name('home');
-Route::get('/painel', [AdminController::class, 'mostrarAdmin'])->middleware(LogadoAdminMiddleware::class)->name('painel');
+
+
+
+Route::get('/login', [LoginController::class, 'mostrarLogin'])
+    ->name('login');
+
+Route::get('/FuncionarioHome', [FuncionarioHome::class, 'FuncionarioHome'])
+    ->middleware(LogadoWebMiddleware::class)
+    ->name('funcionario.home');
+
+Route::get('/home', [homeController::class, 'mostrarHome'])
+    ->middleware(LogadoWebMiddleware::class)
+    ->name('home');

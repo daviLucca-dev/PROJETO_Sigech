@@ -1,251 +1,205 @@
+
 document.addEventListener('DOMContentLoaded', () => {
+
+    // ELEMENTOS DO HTML
 
     const loginForm = document.getElementById('loginForm');
 
     const emailInput = document.getElementById('email');
     const senhaInput = document.getElementById('senha');
 
-    const togglePassword =
-        document.getElementById('togglePassword');
+    const togglePassword = document.getElementById('togglePassword');
 
-    const loginButton =
-        document.getElementById('loginButton');
+    const loginButton = document.getElementById('loginButton');
+    const loginButtonText = document.getElementById('loginButtonText');
 
-    const loginButtonText =
-        document.getElementById('loginButtonText');
-
-    const loginError =
-        document.getElementById('loginError');
-
-    const forgotPassword =
-        document.getElementById('forgotPassword');
+    const loginError = document.getElementById('loginError');
+    const forgotPassword = document.getElementById('forgotPassword');
 
 
-    /* =========================
-       MOSTRAR / OCULTAR SENHA
-    ========================= */
+    // MOSTRAR / OCULTAR SENHA
 
     togglePassword.addEventListener('click', () => {
 
-        const isPassword =
-            senhaInput.type === 'password';
+        const isPassword = senhaInput.type === 'password';
 
-        senhaInput.type =
-            isPassword ? 'text' : 'password';
+        senhaInput.type = isPassword ? 'text' : 'password';
 
         togglePassword.setAttribute(
             'aria-label',
-            isPassword
-                ? 'Ocultar senha'
-                : 'Mostrar senha'
+            isPassword ? 'Ocultar senha' : 'Mostrar senha'
         );
 
     });
 
 
-    /* =========================
-       LIMPAR ERRO
-    ========================= */
+    // LIMPAR MENSAGEM DE ERRO
 
     function clearError() {
+
+        loginError.textContent = '';
         loginError.classList.remove('show');
+
     }
 
-
-    emailInput.addEventListener(
-        'input',
-        clearError
-    );
-
-    senhaInput.addEventListener(
-        'input',
-        clearError
-    );
+    emailInput.addEventListener('input', clearError);
+    senhaInput.addEventListener('input', clearError);
 
 
-    /* =========================
-       LOGIN
-    ========================= */
-
-    loginForm.addEventListener(
-        'submit',
-        async (event) => {
-
-            event.preventDefault();
-
-            clearError();
-
-            const email =
-                emailInput.value.trim();
-
-            const senha =
-                senhaInput.value;
-
-
-            if (!email || !senha) {
-
-                showError(
-                    'Preencha o e-mail e a senha para continuar.'
-                );
-
-                return;
-            }
-
-
-            setLoading(true);
-
-
-            try {
-
-                /*
-                 * Esta requisição será atendida
-                 * pelo Laravel.
-                 *
-                 * O backend deverá verificar:
-                 *
-                 * usuario.email
-                 * usuario.senha
-                 * usuario.situacao
-                 * usuario.perfil
-                 */
-
-                const response = await fetch(
-                    '/login',
-                    {
-                        method: 'POST',
-
-                        headers: {
-                            'Content-Type':
-                                'application/json',
-
-                            'Accept':
-                                'application/json',
-
-                            /*
-                             * Caso o Laravel esteja
-                             * utilizando CSRF,
-                             * adicionaremos o token
-                             * posteriormente.
-                             */
-                        },
-
-                        body: JSON.stringify({
-                            email: email,
-                            senha: senha
-                        })
-                    }
-                );
-
-
-                const data =
-                    await response.json();
-
-
-                if (!response.ok) {
-
-                    showError(
-                        data.message ||
-                        'E-mail ou senha inválidos.'
-                    );
-
-                    setLoading(false);
-
-                    return;
-                }
-
-
-                /*
-                 * O Laravel deverá retornar
-                 * o perfil do usuário.
-                 */
-
-                if (data.perfil === 'gestor') {
-
-                    window.location.href =
-                        'DashboardGestor.html';
-
-                } else {
-
-                    window.location.href =
-                        'DashboardFuncionario.html';
-
-                }
-
-            } catch (error) {
-
-                console.error(
-                    'Erro no login:',
-                    error
-                );
-
-                showError(
-                    'Não foi possível conectar ao sistema. Tente novamente.'
-                );
-
-                setLoading(false);
-
-            }
-
-        }
-    );
-
-
-    /* =========================
-       ERRO
-    ========================= */
+    // EXIBIR MENSAGEM DE ERRO
 
     function showError(message) {
 
         loginError.textContent = message;
-
         loginError.classList.add('show');
 
     }
 
 
-    /* =========================
-       LOADING
-    ========================= */
+    // CONTROLE DO BOTÃO DE LOGIN
 
     function setLoading(isLoading) {
 
-        loginButton.disabled =
-            isLoading;
+        loginButton.disabled = isLoading;
 
-        loginButton.classList.toggle(
-            'loading',
-            isLoading
-        );
+        loginButton.classList.toggle('loading', isLoading);
 
-
-        if (isLoading) {
-
-            loginButtonText.textContent =
-                'Verificando acesso...';
-
-        } else {
-
-            loginButtonText.textContent =
-                'Entrar no sistema';
-
-        }
+        loginButtonText.textContent = isLoading
+            ? 'Verificando acesso...'
+            : 'Entrar no sistema';
 
     }
 
 
-    /* =========================
-       ESQUECI MINHA SENHA
-    ========================= */
+    // PROCESSAR LOGIN
 
-    forgotPassword.addEventListener(
-        'click',
-        () => {
+    loginForm.addEventListener('submit', async (event) => {
 
-            alert(
-                'Para redefinir sua senha, procure a gestão responsável pelo SIGECH.'
-            );
+        event.preventDefault();
+
+        clearError();
+
+        const email = emailInput.value.trim();
+        const senha = senhaInput.value;
+
+
+        // VALIDAR CAMPOS
+
+        if (!email || !senha) {
+
+            showError('Preencha o e-mail e a senha para continuar.');
+
+            return;
 
         }
-    );
+
+
+        // VALIDAR TAMANHO DA SENHA
+
+        if (senha.length < 6) {
+
+            showError('A senha deve ter no mínimo 6 caracteres.');
+
+            return;
+
+        }
+
+
+        setLoading(true);
+
+
+        try {
+
+            // REQUISIÇÃO PARA A API DO LARAVEL
+
+            const response = await fetch('/api/login', {
+
+                method: 'POST',
+
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+
+                body: JSON.stringify({
+                    email: email,
+                    senha: senha
+                })
+
+            });
+
+
+            const data = await response.json();
+
+
+            // VERIFICAR SE O LOGIN FOI REALIZADO
+
+            if (!response.ok || data.erro !== 'n') {
+
+                showError(
+                    data.message || 'E-mail ou senha inválidos.'
+                );
+
+                setLoading(false);
+
+                return;
+
+            }
+
+
+            // VERIFICAR SE A API RETORNOU OS DADOS NECESSÁRIOS
+
+            if (!data.token || !data.usuario_id) {
+
+                showError('Não foi possível concluir a autenticação.');
+
+                setLoading(false);
+
+                return;
+
+            }
+
+
+            // SALVAR COOKIE DO TOKEN
+
+            document.cookie =
+                `token=${encodeURIComponent(data.token)}; path=/; max-age=${7 * 24 * 60 * 60}; SameSite=Lax`;
+
+
+            // SALVAR COOKIE DO ID DO USUÁRIO
+
+            document.cookie =
+                `usuario_id=${encodeURIComponent(data.usuario_id)}; path=/; max-age=${7 * 24 * 60 * 60}; SameSite=Lax`;
+
+
+            // REDIRECIONAR PARA O LARAVEL
+
+            window.location.href = '/home';
+
+
+        } catch (error) {
+
+            console.error('Erro ao realizar login:', error);
+
+            showError(
+                'Não foi possível conectar ao sistema. Tente novamente.'
+            );
+
+            setLoading(false);
+
+        }
+
+    });
+
+
+    // ESQUECI MINHA SENHA
+
+    forgotPassword.addEventListener('click', () => {
+
+        alert(
+            'Para redefinir sua senha, procure a gestão responsável pelo SIGECH.'
+        );
+
+    });
 
 });
