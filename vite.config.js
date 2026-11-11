@@ -7,7 +7,7 @@ export default defineConfig({
     plugins: [
         laravel({
             input: ['resources/css/app.css', 'resources/js/app.js','resources/js/login_teste.js','resources/css/SplashPage.css',
-                'resources/js/SplashPage.js','resources/css/LoginPage.css','resources/js/LoginPage.js'
+                'resources/js/SplashPage.js','resources/css/LoginPage.css','resources/js/LoginPage.js','resources/css/login_teste.css',
             ],
             refresh: true,
             fonts: [
