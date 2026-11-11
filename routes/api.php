@@ -5,8 +5,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\FuncionarioController;
 use App\Http\Controllers\LoginMiddleware;
-use App\Http\Controllers\AdminMiddleware;
+use App\Http\Middleware\AdminMiddleware;
 use App\Http\Controllers\AmbienteController;
+
 
 
 Route::get('/user', function (Request $request) {
